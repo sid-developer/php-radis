@@ -18,7 +18,7 @@ $getCachedValue = $redis->get('tracks');
 if($getCachedValue){
 
     //show data from Redis
-    echo "Data showing from Redis"."<br>";
+    echo "<h1>Data showing from Redis</h1>"."<br>";
     $t0 = microtime(true) * 1000;
     echo $getCachedValue;
     $t1 = microtime(true) * 1000;
@@ -27,7 +27,7 @@ if($getCachedValue){
 
 }else{
     //show data from DB
-    $conn = new mysqli('localhost:3308', 'root', 'root', 'test');
+    $conn = new mysqli('localhost:3308', 'root', 'root', 'gyro_db');
 
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -38,11 +38,11 @@ if($getCachedValue){
     //     exit();
     //   }
 
-    $sql = $conn->query("Select track_name from track_list");
+    $sql = $conn->query("Select track_name from track_list limit 50");
     $track_name = '';
     
     if($sql){
-        echo "Data showing from Database"."<br>";
+        echo "<h1>Data showing from Database</h1>"."<br>";
         $t0 = microtime(true) * 1000;
         while($data = $sql->fetch_assoc()){
 
